@@ -1,9 +1,14 @@
 const mongoose = require('mongoose');
 
-let validateEmail = function (email) {
-    let emailRegex = /^\w+[\.-]?\w+@\w+[\.-]?\w+(\.\w{1,3})+$/;
+const validateEmail = function (email) {
+    let emailRegex = /^\w+[\.-]?\w+@\w+[\.-]?\w+(\.\w{1,3})+$/
     return emailRegex.test(email)
-};
+}
+
+const validatePassword = function(password){
+    let passwordRegex =/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{6,15}$/
+    return passwordRegex.test(password)
+}
 
 const authorSchema = mongoose.Schema(
     {
@@ -36,11 +41,11 @@ const authorSchema = mongoose.Schema(
         password: {
             type: String,
             required: true,
-            trim: true
+            trim: true,
+            validate: [validatePassword, "Please enter a valid password"]
         }
     },
     { timestamps: true }
 )
-
 
 module.exports = mongoose.model('Author', authorSchema);

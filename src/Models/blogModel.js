@@ -5,7 +5,7 @@ const blogSchema = mongoose.Schema(
     {
         title: {
             type: String,
-            required: [true, "Title is require"],
+            required: [true, "Title is required"],
             trim: true
         },
         body: {
@@ -19,26 +19,34 @@ const blogSchema = mongoose.Schema(
             required: [true, "Author Id is required"],
             trim: true
         },
-        tags: [String],
+        tags: [{
+            type:String, 
+            trim: true
+        }],
         category: {
             type: String,
             required: [true, "Category is required"],
             trim: true
         },
-        subcategory: [String],
+        subcategory:  [{
+            type:String, 
+            trim: true
+        }],
         isPublished: {
             type: Boolean,
             default: false
         },
         publishedAt: {
-            type: Date
+            type: Date,
+            default:null
         },
         isDeleted: {
             type: Boolean,
             default: false
         },
         deletedAt: {
-            type: Date
+            type: Date,
+            default:null
         }
     },
     { timestamps: true }
