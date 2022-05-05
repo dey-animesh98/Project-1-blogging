@@ -15,7 +15,7 @@ const isValidRequest = function (request) {
 const createBlog = async function (req, res) {
     try {
         const blogData = req.body
-        const { title, body, authorId, category, subcategory, tags, isPublished } = blogData
+        const { title, body, authorId, category, subcategory, tags} = blogData
 
         if (!isValidRequest(blogData)) return res.status(400).send({ status: false, message: "No input by user." })
 
@@ -137,7 +137,7 @@ const updateBlogById = async function (req, res) {
             updatedBlog['$set']['category'] = category
         }
 
-        if (isValid(isPublished !== undefined)) {
+        if (isValid(isPublished)) {
             if (!Object.prototype.hasOwnProperty.call(updatedBlog, '$set'))
                 updatedBlog['$set'] = {}
             updatedBlog['$set']['isPublished'] = isPublished
